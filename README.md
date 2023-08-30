@@ -14,7 +14,7 @@ This repo helps you to quickly save a credit card to a customer.
 * Use a test credit card from the same country of your seller user.
 8. click pay
 
-In the devtools console, you can check the relevant information from the `payment`, created `customer` and saved `card`.
+In the devtools console of your browser, you can check the relevant information from the `payment`, created `customer` and saved `card`.
 
 The `customer id` and `saved card id`, information needed to initialize a brick with that saved card, you can found here:
 
