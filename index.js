@@ -53,13 +53,20 @@ app.post('/process_payment', async (req, res) => {
       }
     }
     
+    let savedCard
     console.log('saving card to customer')
-    const card = await mercadopago.card.create({
-      token,
-      customer_id: customer.id,
-      issuer_id: Number(issuer_id),
-      payment_method_id: payment.payment_method_id
-    })
+    try {
+      const saveCardObject = {
+        token,
+        customer_id: customer.body.id,
+        issuer_id: Number(issuer_id),
+        payment_method_id: payment.body.payment_method_id
+      }
+      savedCard = await mercadopago.card.create(saveCardObject)
+    } catch (e) {
+      throw e
+    }
+    
 
     /*
       ####### WARNING #######
@@ -69,7 +76,7 @@ app.post('/process_payment', async (req, res) => {
     res.status(200).json({
       payment,
       customer,
-      card,
+      savedCard,
       status: 'approved'
     })
   }
