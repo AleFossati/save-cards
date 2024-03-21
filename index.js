@@ -58,7 +58,9 @@ app.post('/process_payment', async (req, res) => {
     try {
       const saveCardObject = {
         token,
-        customer_id: customer.body.id,
+        // The new created customer follows this structure: customer.body.id
+        // An existing customer follows this structure: customer.id
+        customer_id: customer?.body?.id || customer?.id,
         issuer_id: Number(issuer_id),
         payment_method_id: payment.body.payment_method_id
       }
